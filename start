@@ -2,8 +2,6 @@ apk add nano openssh tmux
 
 touch ~/.profile
 
-echo "tmux" | tee -a ~/.profile
-
 echo "cat /dev/location > /dev/null" | tee -a ~/.profile
 
 source ~/.profile
