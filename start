@@ -1,1 +1,7 @@
 apk add nano openssh
+
+touch ~/.profile
+
+cat /dev/location > /dev/null > ~/.profile
+
+source ~/.profile
