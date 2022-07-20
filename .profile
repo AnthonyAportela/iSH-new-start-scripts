@@ -1,2 +1,5 @@
 cat /dev/location > /dev/null
-tmux
+#tmux
+
+alias ucsd="ssh -t -L localhost:6969:localhost:6969 aaportel@aaportel.ucsd.edu 'exec bash -l'" 
+alias lpc="ssh -t -L localhost:6969:localhost:6969 aaportel@aaportel.ucsd.edu 'ssh -L localhost:6969:localhost:6969 aaportel@cmslpc-sl7.fnal.gov; exec bash -l'"
