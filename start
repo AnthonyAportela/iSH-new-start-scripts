@@ -1,7 +1,9 @@
-apk add nano openssh
+apk add nano openssh tmux
 
 touch ~/.profile
 
-cat /dev/location > /dev/null > ~/.profile
+echo "tmux" | tee -a ~/.profle
+
+echo "cat /dev/location > /dev/null" | tee -a ~/.profle
 
 source ~/.profile
