@@ -1,1 +1,1 @@
-apk add nano openssh tmux git
+apk add nano openssh-client-krb5 tmux git
