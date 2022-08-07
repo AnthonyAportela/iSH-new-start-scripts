@@ -1,0 +1,7 @@
+# - - - - - - - - - - - - LINUX  - - - - - - - - - - - - - - - - - -
+Host cmslpc*.fnal.gov
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+#  - - - - - - - - - - - - LINUX  - - - - - - - - - - - - - - - - - -
