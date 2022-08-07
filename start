@@ -1,6 +1,7 @@
 apk add nano openssh-client-krb5 krb5 tmux git
 mv .profile ~
 mv krb5.conf /etc/
+mkdir ~/.ssh/
 mv config ~/.ssh/
 cd ~
 source .profile
