@@ -1,4 +1,5 @@
-apk add nano openssh-client-krb5 tmux git
+apk add nano openssh-client-krb5 krb5 tmux git
 mv .profile ~
 cd ~
 source .profile
+kinit aaportel@FNAL.GOV
