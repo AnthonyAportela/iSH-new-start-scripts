@@ -1,3 +1,4 @@
 apk add nano openssh-client-krb5 tmux git
-mv ~/iSH-new-start-scripts/.profile ~
-
+mv .profile ~
+cd ~
+source .profile
