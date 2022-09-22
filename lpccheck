@@ -1,0 +1,10 @@
+#!/bin/bash
+for i in $(seq 101 178)
+do
+OUTPUT=$(ssh aaportel@cmslpc"$i".fnal.gov -o LogLevel=ERROR 'who -q -H' | tail -c 2)
+echo $OUTPUT
+if [[ $OUTPUT == 0 ]]; then
+ssh -L localhost:6969:localhost:6969 aaportel@cmslpc"$i".fnal.gov
+break
+fi
+done
