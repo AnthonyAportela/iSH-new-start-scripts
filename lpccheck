@@ -1,10 +1,58 @@
-#!/bin/bash
-for i in $(seq 101 178)
-do
-OUTPUT=$(ssh aaportel@cmslpc"$i".fnal.gov -o LogLevel=ERROR 'who -q -H' | tail -c 2)
-echo $OUTPUT
-if [[ $OUTPUT == 0 ]]; then
-ssh -L localhost:6969:localhost:6969 aaportel@cmslpc"$i".fnal.gov
-break
+#!/bin/ash
+
+# Set the range of hosts to check
+start=101
+end=178
+
+# Check if the -d option was specified
+destroy_tickets=false
+while getopts "d" opt; do
+  case $opt in
+    d)
+      destroy_tickets=true
+      ;;
+  esac
+done
+
+# Check if aaportel@FNAL.GOV has a kinit ticket
+klist_output=$(klist)
+if [ -z "${klist_output##*No credentials cache found*}" ]; then
+  # If aaportel@FNAL.GOV does not have a kinit ticket,
+  # prompt for the kinit password and run kinit
+  echo "Enter kinit password:"
+  read -s password
+  echo
+  kinit_output=$(echo $password | kinit aaportel@FNAL.GOV 2>&1)
+
+  # If the kinit command failed, kill the script
+  if [ -z "${kinit_output##*kinit: Password incorrect while getting initial credentials*}" ]; then
+    echo "Invalid kinit password. Exiting script."
+    exit 1
+  fi
 fi
+
+# Loop through the range of hosts
+for i in $(seq $start $end); do
+  # Construct the hostname for this iteration
+  host="aaportel@cmslpc${i}.fnal.gov"
+
+  # Check if there are any users logged in on the host
+  users=$(ssh -q $host "who" | wc -l)
+
+  # Print the number of users logged in on this host
+  echo "$host: $users users logged in"
+
+  # If there are no users logged in, log in to the host
+  # and exit the loop and the script
+  if [ $users -eq 0 ]; then
+    ssh $host
+
+    # If the -d option was specified, destroy the tickets
+    if $destroy_tickets; then
+      echo "Destroying tickets."
+      kdestroy
+    fi
+
+    exit 0
+  fi
 done
