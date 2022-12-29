@@ -3,6 +3,8 @@ mv .profile ~
 mv krb5.conf /etc/
 mkdir ~/.ssh/
 mv config ~/.ssh/
+mv lpccheck ~
 cd ~
+chmod +x lpccheck
 source .profile
-kinit aaportel@FNAL.GOV
+rm -rf iSH-new-start-scripts
