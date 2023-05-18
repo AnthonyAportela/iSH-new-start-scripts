@@ -45,7 +45,7 @@ for i in $(seq $start $end); do
   # If there are no users logged in, log in to the host
   # and exit the loop and the script
   if [ $users -eq 0 ]; then
-    ssh $host
+    ssh -L localhost:6968:localhost:6968 $host
 
     # If the -d option was specified, destroy the tickets
     if $destroy_tickets; then
