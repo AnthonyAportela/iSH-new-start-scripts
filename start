@@ -3,8 +3,8 @@ mv .profile ~
 mv krb5.conf /etc/
 mkdir ~/.ssh/
 mv config ~/.ssh/
-mv lpccheck ~
-cd ~
 chmod +x lpccheck
+mv lpccheck /usr/local/bin
+cd ~
 source .profile
 rm -rf iSH-new-start-scripts
